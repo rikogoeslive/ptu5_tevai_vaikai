@@ -11,6 +11,7 @@ class Tevas(Base):
     id = Column(Integer, primary_key=True)
     vardas = Column("vardas", String)
     pavarde = Column("pavarde", String)
+    vaikai = relationship("Vaikas", back_populates="tevas")
 
     def __repr__(self):
         return f"({self.id}, {self.vardas}, {self.pavarde})"
@@ -25,7 +26,7 @@ class Vaikas(Base):
     # ForeignKey veda i lentelės pavadinimą
     tevas_id = Column("tevas_id", Integer, ForeignKey("tevas.id"))
     # Relationship veda į objekto pavadinimą
-    tevas = relationship("Tevas")
+    tevas = relationship("Tevas", back_populates="vaikai")
 
     def __repr__(self):
         return f"({self.id}, {self.vardas}, {self.pavarde}, {self.tevas})"
